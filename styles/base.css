@@ -1,19 +1,15 @@
 .app-container {
-    background-color: blue;
 }
 
 .header-container {
     display: flex;
-    background-color: orange;
 }
 
 .app-title-container {
-    background-color: royalblue;
     margin-left: 1vw;
 }
 
 .login-container {
-    background-color: red;
     margin-left : auto;
     align-content: center;
     margin-right: 1vw;
@@ -29,7 +25,6 @@
 @media (max-width: 1920px) {
     .search-container {
         display: flex;
-        background-color: green;
         margin-top:1vh;
         margin-bottom:1vh;
     }
@@ -38,7 +33,6 @@
 @media (max-width: 960px) {
     .search-container {
         display: block;
-        background-color: green;
         margin-top:1vh;
         margin-bottom:1vh;
     }
@@ -93,7 +87,6 @@
 
 
 .footer-container {
-    background-color: purple;
     margin-top:1vh;
     margin-bottom:1vh;
     font-size: 1.5vh;
