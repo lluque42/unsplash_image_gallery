@@ -17,14 +17,15 @@
                 <h1>Image gallery - Powered by Unsplash</h1>
             </div>
             <div class="login-container">
-                Have an Unsplash account? <a href="xxxxxxxxxx">Log in</a>
+                <span>Have an Unsplash account?</span>
+                <button class="login-button" id="login-button">Log in</button>
             </div>
         </div>
         <div class="search-container">
             <input type="text" class="search-input" placeholder="Search for images">
             <button class="search-button">Search</button>
         </div>
-        <div class="results-container">
+        <div class="results-container" id="results-container">
             <div class="image-container">
                 <img class="image-thumbnail"
                     src="https://www.nobelprize.org/images/hayek-13256-portrait-medium.jpg" alt="Nature">
@@ -75,6 +76,7 @@
         </div>
     </div>
     <script src="scripts/main.js"></script>
+    <script src="scripts/result-composing.js"></script>
 </body>
 
 </html>
