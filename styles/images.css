@@ -1,0 +1,71 @@
+@media (max-width: 1920px) {
+    .image-container {
+        margin: 0.3vw;
+        padding: 0.3vw;
+        max-width: 30vw;
+        border: solid;
+        border-color: black;
+        border-width: 3px;
+        background-color: pink;
+    }
+}
+
+@media (max-width: 1600px) {
+    .image-container {
+        margin: 0.3vw;
+        padding: 0.3vw;
+        max-width: 30vw;
+        border: solid;
+        border-color: black;
+        border-width: 3px;
+        background-color: pink;
+    }
+}
+
+@media (max-width: 1280px) {
+    .image-container {
+        margin: 0.3vw;
+        padding: 0.3vw;
+        max-width: 30vw;
+        border: solid;
+        border-color: black;
+        border-width: 3px;
+        background-color: pink;
+    }
+}
+
+@media (max-width: 960px) {
+    .image-container {
+        margin: 0.3vw;
+        padding: 0.3vw;
+        max-width: 30vw;
+        border: solid;
+        border-color: black;
+        border-width: 3px;
+        background-color: pink;
+    }
+}
+
+.image-thumbnail {
+    
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    
+    /*
+    width: 15vw;
+    margin: 1vw;
+    */
+}
+
+.fav-button-add {
+    width:100%;
+
+}
+
+.fav-button-remove {
+
+
+}
