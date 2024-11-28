@@ -65,3 +65,100 @@
 
 
 }
+
+/*
+This is the class for the hoverable elements that will show tooltips
+Intentionally empty to avoid having tooltips for other elements with
+different classes.
+*/
+.tooltip {
+    /*
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+    */
+
+}
+
+/* This applies to the elements with tooltiptext class nested inside elements with tooltip class */
+.tooltip .tooltip-text {
+    visibility: hidden; /* This hides the text by default */
+    background-color: yellow;
+    color: black;
+    text-align: center;
+
+    /* TODO change to responsive relative units*/
+    width: 120px;
+    padding: 5px 0;
+    border-radius: 6px;
+    /* TODO change to responsive relative units*/
+
+    /*
+    transition-property: visibility;
+    transition-delay: 1.5s;
+    transition-duration: 0.15s;
+    transition-timing-function: ease-in-out;
+    */
+    transition: none;   /* I think this is needed because I'll use animations instead of transitions */
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;     /*This is very cool, it's a way to stack elelements on top of each other */
+    
+}
+
+/*
+This applies when hovering IN over an element with the tooltip-text class
+nested in a tooltip class element.
+*/
+.tooltip:hover .tooltip-text {
+    /*visibility: visible;*/
+    /*animation: name duration timing-function delay iteration-count direction fill-mode;*/
+    /*animation: hover-in 0.3s ease-in-out 2s infinite alternate;*/
+    animation-name: hover-in;
+    animation-duration: 10s;
+    animation-timing-function: ease-in-out;
+    animation-delay: 1.5s;
+    animation-iteration-count: once;
+    animation-fill-mode: both;
+    animation-direction: normal;
+}
+
+/*
+This applies when hovering OUT over an element with the tooltip-text class 
+nested in a tooltip class element.
+
+Notice the :not:(hover) weird syntax to represent the opposite of hover
+*/
+.tooltip:not:(hover) .tooltip-text {
+    /*visibility: visible;*/
+    /*animation: name duration timing-function delay iteration-count direction fill-mode;*/
+    /*animation: hover-out 0.3s ease-in-out 2s;*/
+    animation-name: hover-out;
+    animation-duration: 0.15s;
+    animation-timing-function: ease-in-out;
+    animation-delay: 0s;
+    animation-iteration-count: once;
+    animation-fill-mode: both;
+    animation-direction: normal;
+}
+
+/* This are the animations for the tooltip text hovering*/
+@keyframes hover-in {
+    from {                      /* A 0% is equivalent to from */
+        visibility: hidden;
+    }
+    to {                        /* A 100% is equivalent to to */
+        visibility: visible;
+    }
+    
+}
+
+@keyframes hover-out {
+    from {                        /* A 0% is equivalent to from */
+        visibility: visible;
+    }
+    to {                      /* A 100% is equivalent to to */
+        visibility: hidden;
+    }
+    
+}
