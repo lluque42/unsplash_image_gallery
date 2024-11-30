@@ -12,7 +12,7 @@ async function apiRequestSearch(credentials, searchString, numberOfImages) {
 	const query = searchString;
 
 	/*
-	The URLSearchParams() comes from the Web API, specifically the URL API
+	The URLSearchParams() comes from the Web API, specifically the URL API.
 	It allows to work with a json formatted variable (which is cool for
 	manipulation and legibility) and also "It simplifies the process of
 	encoding and appending key-value pairs to a URL in a format that is
@@ -30,8 +30,8 @@ async function apiRequestSearch(credentials, searchString, numberOfImages) {
 		{
 			per_page: `${numberOfImages}`,
 			query: `${searchString}`,
-		//	client_id: `${credentials.ACCESS_KEY}`,		// This can't go in here even though it's a GET request
-														// It goes in the header
+			//client_id: `${credentials.ACCESS_KEY}`,		// This could go either in here 
+															// or in the header (even though it's a GET request)
 		}
 	).toString();
 
@@ -51,20 +51,29 @@ async function apiRequestSearch(credentials, searchString, numberOfImages) {
 	const headers =
 	{
 		"Content-Type": "application/json",
-		"Authorization": `Client-ID ${credentials.ACCESS_KEY}`,
+		"Authorization": `Client-ID ${credentials.ACCESS_KEY}`,			// The API accepts this here even
+																		// though it is a GET or in the url as a parameter
 	};
 	console.log(headers);
 	//const body;										// Irrelevant in this case: GET does not accept a body
 
 	/*
 	Finally the fetching of the url, just like in apiRequestFirstImages()
-	BUT with a payload
+	BUT with a payload.
+	This function returns the definitive response from the API in json format 
 	*/
+	return fetchHttpRequest(url, {
+		method: method,
+		headers: headers,
+		//body: JSON.stringify(body),				// Irrelevant in this case: GET does not accept a body)
+	})
+	/*
 	return fetch(url, {
 		method: method,
 		headers: headers,
 		//body: JSON.stringify(body),				// Irrelevant in this case: GET does not accept a body
 	})
+	
 	// This .then() is used to process the response
 	.then(response => {
 		if (!response.ok) {
@@ -82,14 +91,7 @@ async function apiRequestSearch(credentials, searchString, numberOfImages) {
 		console.error('Error:', error);
 		throw error; // Re-throw the error to be handled by the caller
 	});
-
-
-/*
-	const query = `?client_id=${credentials.ACCESS_KEY}`;
-	const url = `${baseUrl}${endpoint}${query}`;
-	console.log(`The URL is: ${url}`);
-	let apiResponseJson;
-*/
+	*/
 }
 
 /*
