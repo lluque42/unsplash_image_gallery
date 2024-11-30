@@ -32,14 +32,14 @@ async function main() {
 	calling loadCredentials() that assures that at this point its
 	content is valid and not a promise.
 	*/
-	let apiResponseJson = await apiRequestFirstImages(credentials, numberOfImages);
+	//let apiResponseJson = await apiRequestFirstImages(credentials, numberOfImages);
 
 	//apiResponseJson = await apiRequestFirstImagesALTERNATIVESTYLE1(credentials, numberOfImages);
 	//console.log(`The apiRequestFirstImagesALTERNATIVESTYLE1 output:`, JSON.parse(JSON.stringify(apiResponseJson)));
 	//apiResponseJson = await apiRequestFirstImagesALTERNATIVESTYLE2(credentials, numberOfImages);
 	//console.log(`The apiRequestFirstImagesALTERNATIVESTYLE2 output:`, JSON.parse(JSON.stringify(apiResponseJson)));
 
-	showImagesFromApi(apiResponseJson);
+	//showImagesFromApi(apiResponseJson);
 
 
 

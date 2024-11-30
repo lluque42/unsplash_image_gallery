@@ -1,8 +1,13 @@
 async function initBaseListeners() {
 	document.addEventListener('DOMContentLoaded', function () {
-		document.getElementById('login-button').addEventListener('click', function () {
+		/*
+		Notice the async in the second parameter of addEventListener(). It's required for
+		the await of the apiRequestSearch() call since it deals internally with promises.
+		*/
+		document.getElementById('login-button').addEventListener('click', async function () {
 			// Test:
-			addResult("https://www.nobelprize.org/images/hayek-13256-portrait-medium.jpg");
+			//addResult("https://www.nobelprize.org/images/hayek-13256-portrait-medium.jpg");
+			await requestOauthCode();
 		});
 		/*
 		Notice the async in the second parameter of addEventListener(). It's required for

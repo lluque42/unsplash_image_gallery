@@ -62,7 +62,7 @@ async function apiRequestSearch(credentials, searchString, numberOfImages) {
 	BUT with a payload.
 	This function returns the definitive response from the API in json format 
 	*/
-	return fetchHttpRequest(url, {
+	return await fetchHttpRequest(url, {
 		method: method,
 		headers: headers,
 		//body: JSON.stringify(body),				// Irrelevant in this case: GET does not accept a body)
