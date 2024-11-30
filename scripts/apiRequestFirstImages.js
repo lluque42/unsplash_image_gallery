@@ -1,4 +1,41 @@
 /*
+This version is the most short and unfamiliar for someone like me who
+comes from C and C++), because it uses:
+- Named functions instead of anonymous functions (using arrow functions syntax).
+- .then chaining style which is another way to deal with asynchronicity in a
+very disturbing way because its purpose is basically to help to forget that
+we're actually dealing with asynchronous processes.
+- The .catch() method is used to handle errors instead of try/catch.
+*/
+
+// Here there is no need for the async keyword because the function is not async
+// because it does not return a promise (it returns the promise of fetch which is
+// handled by the .then() chain thus the promise is necessarily resolved)
+function apiRequestFirstImages(url) {
+    //fetch('https://api.unsplash.com/photos/?client_id=dccWT6c-O9-cyli0Tcr-aBF7OWqeI2UzE-5RlsgVkRA')
+    // The return here is necessary to allow chaining (i.e. .then())
+    return fetch(url)
+        // This .then() is used to process the response
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json(); // Parse JSON response
+        })
+        // This .then() is used to handle the parsed data
+        .then(data => {
+            //console.log('Data received [style 1]:', data);
+            return data; // Return the data
+        })
+        // This .catch() is used to handle any errors that may occur while processing 
+        .catch(error => {
+            console.error('Error:', error);
+            throw error; // Re-throw the error to be handled by the caller
+        });
+}
+
+
+/*
 This version is a little more explicit and more familiar
 (for someone like me who comes from C and C++), because it uses:
 - Named functions instead of anonymous functions.
@@ -8,7 +45,7 @@ It still uses the .then chaining style though.
 
 // Same as the previous example, with named functions
 // instead of anonymous functions BUT with the chaining style
-function requestFirstImagesStyle2(url) {
+function apiRequestFirstImagesALTERNATIVESTYLE1(url) {
 
     return fetch(url)
         .then(handleResponse2) // Process the response
@@ -49,7 +86,7 @@ of it is even possible in this context.
 */
 
 // Process the returned promise using async/await
-async function requestFirstImagesStyle3(url) {
+async function apiRequestFirstImagesALTERNATIVESTYLE2(url) {
     try {
         // This needs await because it returns a promise
         const response = await makeFetchRequest3(url); // Await the fetch promise

@@ -1,5 +1,14 @@
 /*
 httpRequestNamedFunctionsNoThenChainingButAwaitAsyncStyle
+This version is the most explicit and the most familiar
+(for someone like me who comes from C and C++), because it uses:
+- Named functions instead of anonymous functions
+- async/wait instead of .then chaining
+- try/catch instead of .catch
+
+There is probably another even more explicit way to do this using
+callbacks/hooks/event listeners, but I'm not sure how to do that yet
+of it is even possible in this context.
 */
 
 // Process the returned promise using async/await

@@ -16,7 +16,7 @@ async function main() {
     let apiResponseJson;
     // This await is necessary to wait for the response from the function
     // This function returns a promise (or something that depends on a promise)
-    apiResponseJson = await requestFirstImagesStyle1(url);
+    apiResponseJson = await apiRequestFirstImages(url);
     console.log(`The style 1 output:`, JSON.parse(JSON.stringify(apiResponseJson)));
     // This await is necessary to wait for the response from the function
     // This function returns a promise (or something that depends on a promise)
