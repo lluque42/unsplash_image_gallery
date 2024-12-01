@@ -1,7 +1,7 @@
-main();
-
 let credentials;
 const numberOfImages = 5;
+
+main();
 
 /*
 This function is async in order to be able to use the await keyword
@@ -17,10 +17,6 @@ async function main() {
 	is also read with fetch()
 	*/
 	credentials = await loadCredentials();
-	//console.log(credentials);
-	//console.log(await credentials.ACCESS_KEY);
-
-
 
 	/*
 	This await is still necessary to wait for the response from the function
@@ -33,16 +29,8 @@ async function main() {
 	content is valid and not a promise.
 	*/
 	//let apiResponseJson = await apiRequestFirstImages(credentials, numberOfImages);
-
-	//apiResponseJson = await apiRequestFirstImagesALTERNATIVESTYLE1(credentials, numberOfImages);
-	//console.log(`The apiRequestFirstImagesALTERNATIVESTYLE1 output:`, JSON.parse(JSON.stringify(apiResponseJson)));
-	//apiResponseJson = await apiRequestFirstImagesALTERNATIVESTYLE2(credentials, numberOfImages);
-	//console.log(`The apiRequestFirstImagesALTERNATIVESTYLE2 output:`, JSON.parse(JSON.stringify(apiResponseJson)));
-
 	//showImagesFromApi(apiResponseJson);
-
-
-
-
+	// UNCOMMENT THE TWO LINES ABOVE FOR SHOWING TEN RANDOM RESULTS EVERYTIME THE
+	// PAGE LOADS (THIS BURNS REQUESTS FOR DE DEMO VERSION, NOT WORTHY)
 }
 

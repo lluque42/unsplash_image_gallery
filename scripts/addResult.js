@@ -1,29 +1,3 @@
-/*
-function createImgResult() {
-    return {
-        "id": "123",
-        "alt": "A cute cat",
-        "height": 200,
-        "width": 300,
-        "url_thumbnail": "https://example.com/cat.jpg",
-        "url_full": "https://example.com/cat.jpg",
-        "url_small": "https://example.com/cat.jpg",
-    };
-}
-*/
-
-function parseApiResult(apiResult) {
-    return {
-        id: apiResult.id,
-        alt: apiResult.alt_description,
-        height: apiResult.height,
-        width: apiResult.width,
-        url_thumbnail: apiResult.urls.thumb,
-        url_full: apiResult.urls.full,
-        url_small: apiResult.urls.small,
-    };
-}
-
 function addResult(imgResult) {
     const resultsContainer = document.getElementById('results-container')
     const imageContainer = document.createElement('div');
@@ -129,6 +103,7 @@ function addResult(imgResult) {
 
 function toggleFav(event) {
     console.log('Added to favorites', event.target.parentElement.id);
+	alert("Login first!")
 }
 
 function openImg(event, imgResult) {

@@ -3,7 +3,7 @@ function loadCredentials() {
 	// fetch() actually searches 127.0.0.1:5501/env.json and I can
 	// only think this always goes through a pseudo web server
 	// that blocks hidden files for security reasons
-	return fetch('env.json')
+	return fetch('/env.json')
 		.then(response => {
 			if (!response.ok) {
 				throw new Error(`Error opening .env! Status: ${response.status}`);

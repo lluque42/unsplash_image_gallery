@@ -1,56 +1,4 @@
 /*
-	Source: https://unsplash.com/documentation/user-authentication-workflow
-
-*/
-async function requestOauthCode() {
-	const baseUrl = 'https://unsplash.com/oauth';
-	const endpoint = `/authorize`;
-
-	//const redirectUri = encodeURIComponent("http://localhost:5500/oauthRedirect.html");
-	// IMPORTANT: Every redirect uri must be whitelisted in the Unsplash app configuration.
-	const redirectUri = "http://localhost:5500/oauthRedirect1ReceiveCode.html";
-	//const redirectUri = encodeURIComponent("urn:ietf:wg:oauth:2.0:oob");
-	/*
-	From API doc:
-		param			Description
-		client_id		Your application’s access key.
-		redirect_uri	A URI you control that handles successful user authorization.
-		response_type	The access response type you are requesting. The authorization workflow Unsplash supports requires the value “code” here.
-			(I think this is "code" to ask for the code that will be used in the next step with a post request to eventually get the user's
-			access token that will be used from now on)
-		scope			A +-separated list of requested scopes. e.g. public+read_user
-			(check out https://unsplash.com/documentation/user-authentication-workflow#permission-scopes)
-	*/
-	const parameters = new URLSearchParams(
-		{
-			client_id: `${credentials.ACCESS_KEY}`,
-			redirect_uri: redirectUri,
-			response_type: "code",
-			// Despite the api doc saying "A +-separated list of requested scopes. e.g. public+read_user", this doesn't work for me:
-			//scope: "public+read_user+write_likes+read_collections",
-			// It refers to the final render thanks to the URLSearchParams() which will transform these spaces into '+'
-			scope: "public read_user write_likes read_collections",
-		}
-	).toString();
-
-	// Notice the '?' for the GET
-	const url = `${baseUrl}${endpoint}?${parameters}`;
-
-	console.log(`The URL is: ${url}`);
-	/*
-	If I manually open this url, the page from unsplash to authorize is opened,
-	and when clicking accept, I'm correctly redirected to my redirect uri.
-	BUT when trying to fetch() the url instead of copying and pasting it in a browser
-	I get the cors error.
-
-	Let's try just to open a page instead of using my fetchHttpRequest() function.
-
-	This is enough here because it is a GET request and everything may go in the url.
-	*/
-	window.open(url);
-}
-
-/*
 Now this code is used to build the request of the access token.
 According to the API documentation, once I have the code, this is the new request:
 
@@ -78,13 +26,37 @@ On future requests, send OAuth Bearer access token via the HTTP Authorization he
 
 	Authorization: Bearer ACCESS_TOKEN
 */
-async function requestOauthAccessToken(code) {
+
+/*
+	This is the script that runs when the redirect uri page loads with the code that comes as the
+	response of the first step of the OAuth transactions as a parameter in an url GET.
+
+	(Probably in the future the redirect uri will be the same search page and this
+	code will execute if the page is opened with the param code in its url)
+
+	This code is used to continue the OAuth process using the "code" to finally get the access tokens that
+	will allow to make request in the name of the user.
+*/
+
+let requestCodeUrl;
+setupRequestOauthAccessToken();
+
+async function setupRequestOauthAccessToken() {
+
+	// This gets and parses in an object the parameters (i.e. the part of the url after the '?' with key value pairs)
+	// The object methods should be used to access the parameters by name. Unsplash seems to return only the "code"
+	const urlParameters = new URLSearchParams(window.location.search);
+	const code = urlParameters.get('code');
+	
+	let credentials = await loadCredentials();
+
 	const baseUrl = 'https://unsplash.com/oauth';
 	const endpoint = `/token`;
+	const requestTokenUrl = `${baseUrl}${endpoint}`;
 	// IMPORTANT: Every redirect uri must be whitelisted in the Unsplash app configuration.
-	const redirectUri = "http://localhost:5500/oauthRedirect2ReceiveAccessToken.html";
+	const redirectUri = "http://localhost:5500/OAuthExperiments/oauthRedirect2ReceiveAccessToken.html";
 
-	const parameters = new URLSearchParams(
+	const postParameters = new URLSearchParams(
 		{
 			client_id: `${credentials.ACCESS_KEY}`,
 			client_secret: `${credentials.SECRET_KEY}`,
@@ -94,11 +66,22 @@ async function requestOauthAccessToken(code) {
 		}
 	).toString();
 
-	// Notice the '?' for the GET
-	//const url = `${baseUrl}${endpoint}?${parameters}`;
+	document.getElementById('info-container').innerText = `The code received from Unsplash is: \n${code}\n`;
+	document.getElementById('info-container').innerText += `After clicking, the POST request for the access token will be made to this URL: \n${requestTokenUrl}\n`;
+	document.getElementById('info-container').innerText += `and these are the stringified parameters of the POST request: \n${postParameters}\n`;
 
-	const url = `${baseUrl}${endpoint}`;
-	console.log(`The URL is: ${url}`);
+	const askForTokenBtn = document.getElementById("ask-for-token-btn");
+	askForTokenBtn.dataset.requestTokenUrl = requestTokenUrl;
+	askForTokenBtn.dataset.postParameters = postParameters;
+
+	console.log('The url:', askForTokenBtn.getAttribute('data-request-token-url'));
+	console.log('The post parameters:', askForTokenBtn.getAttribute('data-post-parameters'));
+	//console.log();
+
+}
+
+function processRequestOauthAccessToken(){
+	const askForTokenBtn = document.getElementById("ask-for-token-btn");
 	/*
 	If I manually open this url, the page from unsplash to authorize is opened,
 	and when clicking accept, I'm correctly redirected to my redirect uri.
@@ -108,13 +91,11 @@ async function requestOauthAccessToken(code) {
 	In contrast with the previous step, this must be a POST request so having only an url
 	is not enough.
 	*/
-	//window.open(url);
-	openUrlWithPost(url, parameters);
+	//window.open(askForTokenBtn.getAttribute('data-request-token-url'));
+	openUrlWithPost(askForTokenBtn.getAttribute('data-request-token-url'), askForTokenBtn.getAttribute('data-post-parameters'));
 	
 	//function openWindowWithPost(url, data)
 }
-
-
 
 
 

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>User OAuth redirect to receive the code (from which to request the access token)</title>
+</head>
+
+<body>
+	<div class="redirect-uri-data-container" id="redirect-uri-data-container"></div>
+	<p>
+		If you're seeing this, Unsplash listened to the first step of
+		OAuth process and, with luck, here is the code to continue the process.
+	</p>
+	<div id="info-container">
+	</div>
+	<button id="ask-for-token-btn" onclick="processRequestOauthAccessToken()">Ask for access token</button>
+	
+	<!--
+	<button onclick="window.open('oauthRedirect1ReceiveCode.html', '_self')">Click to continue...</button>
+		The following file is shared by frontend and backend for pedagogic purposes
+		to group in one place the whole OAuth transactions.
+	<script src="scripts/oauthUserAuthentication.js"></script>
+	-->
+	<script src="scripts/loadCredentials.js"></script>
+	<script src="scripts/openUrlWithPost.js"></script>
+	<script src="scripts/requestOauthAccessToken.js"></script>
+
+</body>
+
+</html>
