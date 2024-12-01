@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>User OAuth first debug page</title>
+</head>
+
+<body>
+	<div class="redirect-uri-data-container" id="redirect-uri-data-container"></div>
+	<p>
+		The OAuth process is about to start.
+		Nothing has been done yet.
+		After you click, a GET request will use the APP_ID to ask Unspash to autorize the user
+		and give us back a code that will be used to then ask Unsplash for an access token
+		for us to act on behalf of the user.
+	</p>
+	<div id="info-container">
+	</div>
+	<button id="ask-for-code-btn" onclick="processRequestOauthCode()">Ask for code</button>
+	<!--
+		The following file is shared by frontend and backend for pedagogic purposes
+		to group in one place the whole OAuth transactions.
+	-->
+	<script src="scripts/loadCredentials.js"></script>
+	<script src="scripts/requestOauthCode.js"></script>
+</body>
+
+</html>

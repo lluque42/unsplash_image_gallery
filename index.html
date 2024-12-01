@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Image gallery</title>
+	<link rel="stylesheet" href="styles/base.css">
+	<link rel="stylesheet" href="styles/results.css">
+	<link rel="stylesheet" href="styles/images.css">
+</head>
+
+<body>
+	<div class="app-container">
+		<div class="header-container">
+			<div class="app-title-container">
+				<h1>Image gallery - Powered by Unsplash</h1>
+			</div>
+			<div class="login-container">
+				<span>Have an Unsplash account?</span>
+				<button class="login-button" id="login-button">Log in</button>
+			</div>
+		</div>
+		<div class="search-container">
+			<input type="text" class="search-input" id="search-input" placeholder="Search for images">
+			<button class="search-button" id="search-button">Search</button>
+		</div>
+		<div class="results-container" id="results-container">
+			<!-- This will be filled by JavaScript -->
+		</div>
+		<div class="footer-container">
+			lluque - 2024
+		</div>
+	</div>
+	<!-- ORDER MATTERS -->
+	<!-- OAUTH EXPERIMENTS RELATED SCRIPTS -->
+	<script src="OAuthExperiments/scripts/entryPointUserAuthentication.js"></script>
+	<!-- PUBLIC REQUESTS RELATED SCRIPTS -->
+	<script src="scripts/apiRequestFirstImages.js"></script>
+	<script src="scripts/apiRequestSearch.js"></script>
+	<script src="scripts/showImagesFromApi.js"></script>
+	<script src="scripts/fetchHttpRequest.js"></script>
+	<script src="scripts/initBaseListeners.js"></script>
+	<script src="scripts/addResult.js"></script>
+	<script src="scripts/loadCredentials.js"></script>
+	<script src="scripts/main.js"></script>
+
+</body>
+
+</html>
+
+<!--
+            <div class="image-container">
+                <img class="image-thumbnail"
+                    src="https://www.nobelprize.org/images/hayek-13256-portrait-medium.jpg" alt="Nature">
+                <br>
+                <button class="fav-button-add">Set as favorite</button>
+            </div>
+            <div class="image-container">
+                <img class="image-thumbnail"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5LLzdwUBQkx3gb18AFkemo-pZCOKZAR0vzHxOeq05IY_TAXZ9lakFKamFPOw4uhL8KcmgXC56IjYuBQobOI0Pww"
+                    alt="Nature">
+                <br>
+                <button class="fav-button-add">Set as favorite</button>
+            </div>
+            <div class="image-container">
+                <img class="image-thumbnail"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTsdTs-fW4kN_7vgPD_sVuhwRX_OfnUdn44A&s"
+                    alt="Nature">
+                <br>
+                <button class="fav-button-add">Set as favorite</button>
+            </div>
+            <div class="image-container">
+                <img class="image-thumbnail"
+                    src="https://upload.wikimedia.org/wikipedia/commons/7/7e/MurrayBW.jpg"
+                    alt="Nature">
+                <br>
+                <button class="fav-button-add">Set as favorite</button>
+            </div>
+            <div class="image-container">
+                <img class="image-thumbnail"
+                    src="https://www.mises.org.es/wp-content/uploads/2016/01/entrevista-a-jesus-huerta-de-soto-6015559.jpg"
+                    alt="Nature">
+                <br>
+                <button class="fav-button-add">Set as favorite</button>
+            </div>
+            <div class="image-container">
+                <img class="image-thumbnail"
+                    src="https://capital.es/wp-content/uploads/2023/09/Capital_Sept_2022_Rallo_001-e1712137542251.jpg"
+                    alt="Nature">
+                <br>
+                <button class="fav-button-add">Set as favorite</button>
+            </div>
+-->
