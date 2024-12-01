@@ -7,7 +7,8 @@ async function requestOauthCode() {
 	const endpoint = `/authorize`;
 
 	//const redirectUri = encodeURIComponent("http://localhost:5500/oauthRedirect.html");
-	const redirectUri = "http://localhost:5500/oauthRedirect.html";
+	// IMPORTANT: Every redirect uri must be whitelisted in the Unsplash app configuration.
+	const redirectUri = "http://localhost:5500/oauthRedirect1ReceiveCode.html";
 	//const redirectUri = encodeURIComponent("urn:ietf:wg:oauth:2.0:oob");
 	/*
 	From API doc:
@@ -43,9 +44,102 @@ async function requestOauthCode() {
 	I get the cors error.
 
 	Let's try just to open a page instead of using my fetchHttpRequest() function.
+
+	This is enough here because it is a GET request and everything may go in the url.
 	*/
 	window.open(url);
 }
+
+/*
+Now this code is used to build the request of the access token.
+According to the API documentation, once I have the code, this is the new request:
+
+Make a POST request to https://unsplash.com/oauth/token with the following parameters:
+
+	param			Description
+	client_id		Your application’s access key.
+	client_secret	Your application’s secret key.
+	redirect_uri	Your application’s redirect URI.
+	code			The authorization code supplied to the callback by Unsplash.
+	grant_type		Value “authorization_code”.
+
+If successful, the response body will be a JSON representation of your user’s access token:
+
+	{
+	"access_token": "091343ce13c8ae780065ecb3b13dc903475dd22cb78a05503c2e0c69c5e98044",
+	"token_type": "bearer",
+	"scope": "public read_photos write_photos",
+	"created_at": 1436544465
+	}
+
+Access tokens do not expire.
+
+On future requests, send OAuth Bearer access token via the HTTP Authorization header:
+
+	Authorization: Bearer ACCESS_TOKEN
+*/
+async function requestOauthAccessToken(code) {
+	const baseUrl = 'https://unsplash.com/oauth';
+	const endpoint = `/token`;
+	// IMPORTANT: Every redirect uri must be whitelisted in the Unsplash app configuration.
+	const redirectUri = "http://localhost:5500/oauthRedirect2ReceiveAccessToken.html";
+
+	const parameters = new URLSearchParams(
+		{
+			client_id: `${credentials.ACCESS_KEY}`,
+			client_secret: `${credentials.SECRET_KEY}`,
+			redirect_uri: redirectUri,
+			code: code,
+			grant_type: 'authorization_code',
+		}
+	).toString();
+
+	// Notice the '?' for the GET
+	//const url = `${baseUrl}${endpoint}?${parameters}`;
+
+	const url = `${baseUrl}${endpoint}`;
+	console.log(`The URL is: ${url}`);
+	/*
+	If I manually open this url, the page from unsplash to authorize is opened,
+	and when clicking accept, I'm correctly redirected to my redirect uri.
+	BUT when trying to fetch() the url instead of copying and pasting it in a browser
+	I get the cors error.
+
+	In contrast with the previous step, this must be a POST request so having only an url
+	is not enough.
+	*/
+	//window.open(url);
+	openUrlWithPost(url, parameters);
+	
+	//function openWindowWithPost(url, data)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
